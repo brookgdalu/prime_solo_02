@@ -4,7 +4,10 @@
 //would only cycle through arrayAtticus[0]. 
 
 //2. basePercent representign the STI percentage
-//was being returned as a negative number because of the - 1 // 
+//was being returned as a negative number because of the - 1 //
+
+//3. newArray[2] and newArray[3] were not being rounded up to the nearest dollar with the Math.round() attribute. 
+
 
 
 var arrayAtticus = ["Atticus", "2405", "47000", 3];
