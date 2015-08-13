@@ -3,21 +3,33 @@
 //1. i was not specified for calculateSTI(array) thus the for loop 
 //would only cycle through arrayAtticus[0]. 
 
-//2. basePercent representign the STI percentage
-//was being returned as a negative number because of the - 1 //
-
-//3. newArray[2] and newArray[3] were not being rounded up to the nearest dollar with the Math.round() attribute. 
+//2. basePercent representing the STI percentage
+//was being returned as a negative number because of the - 1 // 
 
 
+//objects are the same thing as a function
 
-var arrayAtticus = ["Atticus", "2405", "47000", 3];
-var arrayJem = ["Jem", "62347", "63500", 4];
-var arrayBoo = ["Boo", "11435", "54000", 3];
-var arrayScout = ["Scout", "6243", "74750", 5];
+var Employee = function(name, employeeNumber, salary, rating){ 
+    this.name = name;
+    this.employeeNumber = employeeNumber;
+    this.salary = salary;
+    this.rating = rating;   
+}; 
 
-var array = [arrayAtticus, arrayJem, arrayBoo, arrayScout];
+var Output = function(name, bonuspercent, totalsalary, bonus){
+  this.name = name; 
+  this.bonuspercent = bonuspercent; 
+  this.totalsalary = totalsalary; 
+  this.bonus = bonus;
+};
 
 
+var Atticus = new Employee('Atticus', '2405', '47000', 3); 
+var Jem = new Employee('Jem', '62347', '63500', 4); 
+var Boo = new Employee('Boo', '11435', '54000', 3)
+var Scout = new Employee('Scout', '6243', '74750', 5)
+
+var allEmployees = [Atticus, Jem, Boo, Scout]; 
 //Create variables used to write to the DOM
 var newEl, newText, position;
 //Capture the position of insertion into the DOM
@@ -25,31 +37,33 @@ position = document.getElementById('content');
 
 //Loop the array, extracting each array and writing information to the DOM
 //Note that the information is not 'clean'
-for(var i = 0; i < array.length; i++){
-	array[i] = calculateSTI(array[i]); 
- 	newEl = document.createElement('li');
-	newText = document.createTextNode(array[i]);
-	newEl.appendChild(newText);
-	position.appendChild(newEl);
+for(var i = 0; i < allEmployees.length; i++){
+  allEmployees[i] = calculateSTI(allEmployees[i]); 
+  newEl = document.createElement('li');
+  newText = document.createTextNode(output.name + " " + output.bonuspercent + " " + output.totalsalary + " " + output.bonus);
+  newEl.appendChild(newText);
+  position.appendChild(newEl);
 }
 
-function calculateSTI(array){
-  var newArray = [];
+function calculateSTI(employee){
+  //var newArray = [];
+  //newArray[0] = array.name;
+  output = new Output(); 
 
-  newArray[0] = array[0];
-  var employeeNumber = array[1];
-  var baseSalary = (array[2]);
-  var reviewScore = array[3];
+  output.name = employee.name; 
+  var employeeNumber = employee.employeeNumber;
+  var baseSalary = employee.salary;
+  var reviewScore = employee.rating;
   var bonus = getBaseSTI(reviewScore) + getYearAdjustment(employeeNumber) - getIncomeAdjustment(baseSalary);
   if(bonus > 0.13){
     bonus = 0.13;
   }
 
-  newArray[1] = (bonus * 100) + "%";
-  newArray[2] = "$" + Math.round((parseInt(baseSalary) * bonus) + parseInt(baseSalary));
-  newArray[3] = "$" + Math.round(baseSalary * bonus);
-console.log(newArray[0] + " " + newArray[1] + " " + newArray[2] + " " + newArray[3]);
-  return newArray.join(", ");
+  output.bonuspercent = (bonus * 100) + "%";
+  output.totalsalary = "$" + Math.round((parseInt(baseSalary) * bonus) + parseInt(baseSalary));
+  output.bonus = "$" + Math.round(baseSalary * bonus);
+//console.log(newArray[0] + " " + newArray[1] + " " + newArray[2] + " " + newArray[3]);
+  return output//.join(", ");
 }
 
 function getBaseSTI(reviewScore){
@@ -90,3 +104,71 @@ function getIncomeAdjustment(salary){
   }
   return incomeAdjustment;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+//Thursday 8/13/2015 //objects and constructors; 
+
+
+var o = new Object(); 
+o.engine = 'V6'; 
+
+//console.log(o); 
+
+var o = {
+
+  engine: 'V6', 
+  wheels: 4
+}; 
+
+o.color = 'red'; 
+
+//console.log(o); 
+
+var Car = function(color, engine, wheels){ //objects are the same thing as a function
+    this.wheels = wheels || 4;
+    this.color = color;
+    this.engine = engine;  
+
+}; 
+
+Car.prototype.goFast = function(){
+  console.log("My " + this.engine + " make me go vroom!"); 
+}
+//Car is a constructor: WHICH ARE CAPITALIZED
+
+
+var Truck = function(color, engine, wheels){
+  Car.call(this); 
+  this.flatbed = true; 
+}
+
+Truck.prototype = Object.create(Car.prototype); 
+
+var car = new car('red', 'v6'); 
+var truck = new Truck('grey', 'v10', 6, true); 
+
+console.log(car); 
+console.log(truck); 
+
+var car1 = new Car('red', 'v6', 4); 
+
+
+
+console.log(car1); 
+
+console.log(typeof(car1)); */
