@@ -1,0 +1,25 @@
+   
+
+    body {
+    	text-align: center;
+    	background-color: #000000; 
+
+
+    }
+
+    h1 {
+    	color: #ffffff;
+    	font: 50px arial, sans-serif;
+    	text-align:center;
+		text-shadow: 1px 1px 1px #CC9;
+
+    }
+
+    ul {
+    	color: #ffffff;
+   		position: center; 
+    	font: 25px arial, sans-serif;
+    	list-style: none; 
+    	border: 1px dotted #CC9; 
+    	line-height: 150%; 
+    }
